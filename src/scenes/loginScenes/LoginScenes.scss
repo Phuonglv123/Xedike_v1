@@ -1,0 +1,111 @@
+.form-login {
+  background-color: #f2f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.img-form-login {
+  width: 25%;
+}
+
+.img {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.backGround {
+}
+
+.backGround-form {
+  background-color: white;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-account {
+  line-height: 2;
+
+  span {
+    font-weight: bold;
+    font-size: 15px;
+  }
+}
+
+.form-sign-center {
+  height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: white;
+}
+
+
+
+.gsuite-footer-login{
+  text-align: center;
+  margin-bottom: 10px;
+  span{
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+  }
+
+}
+
+.form-sign-img{
+  img{
+    width: 14%;
+    margin-left: 8%
+  }
+  display: flex;
+  align-items: center;
+  span{
+    margin-left: 5px;
+    margin-top: 13px;
+    font-size: 19px;
+    font-weight: 900;
+  }
+}
+
+.gsuite-text-error{
+  font-size: 12px;
+  font-weight: 400;
+  color: red;
+}
+
+.fade-in {
+  animation: fadeIn ease 5s;
+  -webkit-animation: fadeIn ease 5s;
+  -moz-animation: fadeIn ease 5s;
+  -o-animation: fadeIn ease 5s;
+  -ms-animation: fadeIn ease 5s;
+}
+
+
+@keyframes fadeIn{
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
