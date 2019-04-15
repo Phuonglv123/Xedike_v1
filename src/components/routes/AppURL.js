@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class NotFound404 extends Component {
+class AppUrl extends Component {
     render() {
         return (
             <div>
-                NotFound404
+
             </div>
         );
     }
 }
 
-export default NotFound404;
+export default AppUrl;
