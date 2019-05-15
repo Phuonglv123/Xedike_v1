@@ -34,7 +34,7 @@ class HomeScenes extends Component {
                 </div>
                 <div className="bck-card">
                     <div>
-                        <img src={require('../../res/img/bus.webp')} alt=""/>
+                        <img style={{width: '100%'}} src={require('../../res/img/bus.webp')} alt=""/>
                     </div>
                     <div className="tab-on">
                         <Tabs defaultActiveKey="1" tabBarStyle={{border: "none"}}>
@@ -50,11 +50,11 @@ class HomeScenes extends Component {
                                     </div>
                                 </div>
                                 <div style={{padding: '20px'}}>
-                                    <Row>
+                                    <Row gutter={16}>
                                         <Col span={5}>
                                             <Select
                                                 showSearch
-                                                style={{width: 200}}
+                                                style={{width: '100%'}}
                                                 placeholder="Select a person"
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
@@ -68,7 +68,7 @@ class HomeScenes extends Component {
                                         <Col span={5}>
                                             <Select
                                                 showSearch
-                                                style={{width: 200}}
+                                                style={{width: '100%'}}
                                                 placeholder="Select a person"
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
@@ -79,13 +79,13 @@ class HomeScenes extends Component {
                                             </Select>
                                         </Col>
                                         <Col span={4}>
-                                            <DatePicker onChange={this.onChangeDate()}/>
+                                            <DatePicker style={{width: '100%'}} onChange={this.onChangeDate()}/>
                                         </Col>
                                         <Col span={4}>
-                                            <DatePicker onChange={this.onChangeDate()}/>
+                                            <DatePicker style={{width: '100%'}} onChange={this.onChangeDate()}/>
                                         </Col>
                                         <Col span={4}>
-                                            <Button type="primary" block>Primary</Button>
+                                            <Button type="primary" block>Search</Button>
                                         </Col>
                                     </Row>
                                 </div>
@@ -95,102 +95,99 @@ class HomeScenes extends Component {
                             </TabPane>
                         </Tabs>
                     </div>
-
-
                 </div>
 
-                <div id='card-book-a'>
-                    <div>
-                        <div style={{textAlign: 'center'}}>
-                            <h3>Offer</h3>
+                {/*<div id='card-book-a'>*/}
+                    {/*<div>*/}
+                        {/*<div style={{textAlign: 'center'}}>*/}
+                            {/*<h3>Offer</h3>*/}
+                        {/*</div>*/}
+                        {/*<div style={{padding: '20px'}}>*/}
+                            {/*<Row gutter={24}>*/}
+                                {/*<Col span={6}>*/}
+                                    {/*<div style={{height: '100px'}}>*/}
+                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                                             {/*style={{width: '100%'}}/>*/}
+                                    {/*</div>*/}
+                                {/*</Col>*/}
 
-                        </div>
-                        <div style={{padding: '20px'}}>
-                            <Row gutter={24}>
-                                <Col span={6}>
-                                    <div style={{height: '100px'}}>
-                                        <img src={require('../../res/img/1553493193291.jpg')} alt=""
-                                             style={{width: '100%'}}/>
+                                {/*<Col span={6}>*/}
+                                    {/*<div style={{height: '100px'}}>*/}
+                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                                             {/*style={{width: '100%'}}/>*/}
+                                    {/*</div>*/}
+                                {/*</Col>*/}
+                                {/*<Col span={6}>*/}
+                                    {/*<div style={{height: '100px'}}>*/}
+                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                                             {/*style={{width: '100%'}}/>*/}
+                                    {/*</div>*/}
+                                {/*</Col>*/}
+                                {/*<Col span={6}>*/}
+                                    {/*<div style={{height: '100px'}}>*/}
+                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                                             {/*style={{width: '100%'}}/>*/}
+                                    {/*</div>*/}
+                                {/*</Col>*/}
+                            {/*</Row>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+                <div className="card-ticket">
+                    <div className="card-ticket-padding">
+                        <Card title="Top Routes" bordered={true}>
+                            <Row gutter={16}>
+                                <Col span={12}>
+                                    <div className="card-book-ticket">
+                                        <div>
+                                            <h6>Ha Noi To TP HCM</h6>
+                                            <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
+                                        </div>
+                                        <div>
+                                            <Button type='primary'>Book</Button>
+                                        </div>
                                     </div>
+                                    <Divider dashed={true}/>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="card-book-ticket">
+                                        <div>
+                                            <h6>Ha Noi To TP HCM</h6>
+                                            <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
+                                        </div>
+                                        <div>
+                                            <Button type='primary'>Book</Button>
+                                        </div>
+                                    </div>
+                                    <Divider dashed={true}/>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="card-book-ticket">
+                                        <div>
+                                            <h6>Ha Noi To TP HCM</h6>
+                                            <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
+                                        </div>
+                                        <div>
+                                            <Button type='primary'>Book</Button>
+                                        </div>
+                                    </div>
+                                    <Divider dashed={true}/>
+                                </Col>
+                                <Col span={12}>
+                                    <div className="card-book-ticket">
+                                        <div>
+                                            <h6>Ha Noi To TP HCM</h6>
+                                            <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
+                                        </div>
+                                        <div>
+                                            <Button type='primary'>Book</Button>
+                                        </div>
+                                    </div>
+                                    <Divider dashed={true}/>
                                 </Col>
 
-                                <Col span={6}>
-                                    <div style={{height: '100px'}}>
-                                        <img src={require('../../res/img/1553493193291.jpg')} alt=""
-                                             style={{width: '100%'}}/>
-                                    </div>
-                                </Col>
-                                <Col span={6}>
-                                    <div style={{height: '100px'}}>
-                                        <img src={require('../../res/img/1553493193291.jpg')} alt=""
-                                             style={{width: '100%'}}/>
-                                    </div>
-                                </Col>
-                                <Col span={6}>
-                                    <div style={{height: '100px'}}>
-                                        <img src={require('../../res/img/1553493193291.jpg')} alt=""
-                                             style={{width: '100%'}}/>
-                                    </div>
-                                </Col>
                             </Row>
-                        </div>
-                    </div>
-                    <div className="card-ticket">
-                        <div className="card-ticket-padding">
-                            <Card title="Top Routes" bordered={true}>
-                                <Row gutter={16}>
-                                    <Col span={12}>
-                                        <div className="card-book-ticket">
-                                            <div>
-                                                <h6>Ha Noi To TP HCM</h6>
-                                                <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
-                                            </div>
-                                            <div>
-                                                <Button type='primary'>Book</Button>
-                                            </div>
-                                        </div>
-                                        <Divider dashed={true}/>
-                                    </Col>
-                                    <Col span={12}>
-                                        <div className="card-book-ticket">
-                                            <div>
-                                                <h6>Ha Noi To TP HCM</h6>
-                                                <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
-                                            </div>
-                                            <div>
-                                                <Button type='primary'>Book</Button>
-                                            </div>
-                                        </div>
-                                        <Divider dashed={true}/>
-                                    </Col>
-                                    <Col span={12}>
-                                        <div className="card-book-ticket">
-                                            <div>
-                                                <h6>Ha Noi To TP HCM</h6>
-                                                <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
-                                            </div>
-                                            <div>
-                                                <Button type='primary'>Book</Button>
-                                            </div>
-                                        </div>
-                                        <Divider dashed={true}/>
-                                    </Col>
-                                    <Col span={12}>
-                                        <div className="card-book-ticket">
-                                            <div>
-                                                <h6>Ha Noi To TP HCM</h6>
-                                                <span>Tue Apr 30 2019 | Fare starts from ₹ 500</span>
-                                            </div>
-                                            <div>
-                                                <Button type='primary'>Book</Button>
-                                            </div>
-                                        </div>
-                                        <Divider dashed={true}/>
-                                    </Col>
-
-                                </Row>
-                            </Card>
-                        </div>
+                        </Card>
                     </div>
                 </div>
             </div>

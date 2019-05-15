@@ -4,11 +4,22 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {logoutUser} from '../../actions/Auth';
 import {withRouter} from 'react-router-dom';
-import {Layout, Menu} from "antd";
+import {Button, Layout, Menu} from "antd";
+import LoginComponent from "../Modal/LoginComponent";
+import RegiserComponent from "../Modal/RegiserComponent";
 
 const {Header} = Layout;
 
 class NavBar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalLogin: false,
+            modalRegister: false,
+        }
+    }
+
 
     onLogout(e) {
         e.preventDefault();
@@ -19,7 +30,7 @@ class NavBar extends Component {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
             <Menu
-                theme="dark"
+                theme="light"
                 mode="horizontal"
                 defaultSelectedKeys={['2']}
                 style={{lineHeight: '64px'}}
@@ -31,7 +42,7 @@ class NavBar extends Component {
         )
         const guestLinks = (
             <Menu
-                theme="dark"
+                theme="light"
                 mode="horizontal"
                 defaultSelectedKeys={['2']}
                 style={{lineHeight: '64px'}}
@@ -40,18 +51,29 @@ class NavBar extends Component {
                     <Link to="/">Home</Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                    <Link to="/login">Login</Link>
+                    <Button htmlType='button' size='default' onClick={() => {
+                        this.setState({modalLogin: !this.state.modalLogin})
+                    }}>Login</Button>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <Link to="/register">Register</Link>
+                    <Button htmlType='button' size='default' onClick={() => {
+                        this.setState({modalRegister: !this.state.modalRegister})
+                    }}>Register</Button>
                 </Menu.Item>
             </Menu>
         )
         return (
-            <Header>
-                <div className="logo"/>
-                {isAuthenticated ? authLinks : guestLinks}
-            </Header>
+            <div>
+                <Header style={{backgroundColor: 'white'}}>
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div className="logo"/>
+                        {isAuthenticated ? authLinks : guestLinks}
+                    </div>
+                </Header>
+                {this.state.modalLogin ? <LoginComponent onClose={()=>{this.setState({modalLogin: !this.state.modalLogin})}}/> : null}
+                {this.state.modalRegister ? <RegiserComponent onClose={()=>{this.setState({modalRegister: !this.state.modalRegister})}}/> : null}
+            </div>
+
         )
     }
 }
