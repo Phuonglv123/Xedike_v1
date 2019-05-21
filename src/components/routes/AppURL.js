@@ -1,13 +1,7 @@
-import React, {Component} from 'react';
-
-class AppUrl extends Component {
-    render() {
-        return (
-            <div>
-
-            </div>
-        );
+class AppURL {
+    static home(){
+        return '/'
     }
 }
 
-export default AppUrl;
+export default new AppURL();

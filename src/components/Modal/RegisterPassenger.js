@@ -1,10 +1,37 @@
 import React, {Component} from 'react';
 import {Button, Col, Divider, Form, Icon, Input, Row} from "antd";
+import API from "../../service/api/API";
+import type {Passenger} from "../../service/type/user";
 
-class RegisterPassenger extends Component {
+type Props = {};
+
+type State = {
+    passenger: Passenger
+}
+
+class RegisterPassenger extends Component<Props, State> {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            passenger: null
+        }
+    }
+
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields(async (err, values) => {
+            if (!err) {
+                let res = await API.registerPassenger(this.state.passenger)
+                console.log(res)
+            }
+        });
+    };
 
     render() {
         const {getFieldDecorator} = this.props.form;
+        const passenger = this.state.passenger;
         return (
             <div id='loginComponent'>
                 <div className='header-login'>
@@ -21,6 +48,13 @@ class RegisterPassenger extends Component {
                                     style={{height: '50px'}}
                                     prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                     placeholder="Username"
+                                    value={passenger.usernanme}
+                                    onChange={(e) => this.setState({
+                                        passenger: {
+                                            ...Passenger,
+                                            name: e.target.value
+                                        }
+                                    })}
                                 />,
                             )}
                         </Form.Item>
@@ -33,18 +67,32 @@ class RegisterPassenger extends Component {
                                     prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                     type="password"
                                     placeholder="Password"
+                                    value={passenger.password}
+                                    onChange={(e) => this.setState({
+                                        passenger: {
+                                            ...Passenger,
+                                            name: e.target.value
+                                        }
+                                    })}
                                 />,
                             )}
                         </Form.Item>
                         <Form.Item>
                             {getFieldDecorator('password', {
-                                rules: [{required: true, message: 'Please input your Password!'}],
+                                rules: [{required: true, message: 'Please input your re-Password!'}],
                             })(
                                 <Input
                                     style={{height: '50px'}}
                                     prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                     type="password"
                                     placeholder="Re-Password"
+                                    value={passenger.confirmedpassword}
+                                    onChange={(e) => this.setState({
+                                        passenger: {
+                                            ...Passenger,
+                                            name: e.target.value
+                                        }
+                                    })}
                                 />,
                             )}
                         </Form.Item>
@@ -58,6 +106,13 @@ class RegisterPassenger extends Component {
                                             style={{height: '50px'}}
                                             prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                             placeholder="First Name"
+                                            value={passenger.firstname}
+                                            onChange={(e) => this.setState({
+                                                passenger: {
+                                                    ...Passenger,
+                                                    name: e.target.value
+                                                }
+                                            })}
                                         />,
                                     )}
                                 </Form.Item>
@@ -71,6 +126,13 @@ class RegisterPassenger extends Component {
                                             style={{height: '50px'}}
                                             prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                             placeholder="Last Name"
+                                            value={passenger.lastname}
+                                            onChange={(e) => this.setState({
+                                                passenger: {
+                                                    ...Passenger,
+                                                    name: e.target.value
+                                                }
+                                            })}
                                         />,
                                     )}
                                 </Form.Item>
@@ -86,6 +148,13 @@ class RegisterPassenger extends Component {
                                             style={{height: '50px'}}
                                             prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                             placeholder="Phone Number"
+                                            value={passenger.phone}
+                                            onChange={(e) => this.setState({
+                                                passenger: {
+                                                    ...Passenger,
+                                                    name: e.target.value
+                                                }
+                                            })}
                                         />,
                                     )}
                                 </Form.Item>
@@ -99,6 +168,13 @@ class RegisterPassenger extends Component {
                                             style={{height: '50px'}}
                                             prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                                             placeholder="Birthday"
+                                            value={passenger.birthday}
+                                            onChange={(e) => this.setState({
+                                                passenger: {
+                                                    ...Passenger,
+                                                    name: e.target.value
+                                                }
+                                            })}
                                         />,
                                     )}
                                 </Form.Item>
@@ -117,7 +193,6 @@ class RegisterPassenger extends Component {
                         </Form.Item>
                     </Form>
                 </div>
-
             </div>
         );
     }

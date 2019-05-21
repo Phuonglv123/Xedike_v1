@@ -1,57 +1,50 @@
 import React, {Component} from 'react';
-import {Button, Checkbox, Divider, Form, Icon, Input, Modal} from 'antd';
-import './LoginComponent.css'
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {loginUser} from "../../actions/Auth";
+import {Button, Checkbox, Form, Icon, Input, Modal} from 'antd';
+import Auth from '../../service/api/Auth';
+import './LoginComponent.css';
 
-class LoginComponent extends Component {
-    constructor() {
-        super();
-        this.state = {
-            username: '',
-            password: '',
-            errors: {},
-        }
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+type Props = {
+    history: History
+}
 
-    handleInputChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
+type State = {
+    username: string,
+    password: string,
+    textError: string,
+}
 
-    handleSubmit = e => {
+class LoginComponent extends Component<Props, State> {
+    state: State = {
+        username: '',
+        password: '',
+        textError: null
+    };
+
+    handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                console.log(values)
-                const user = {
+                let res = await Auth.signIn({
                     username: this.state.username,
-                    password: this.state.password,
+                    password: this.state.password
+                });
+                console.log(res)
+                if (res.code === 400) {
+                    this.setState({
+                        textError: res.detail.globalErrors
+                    })
+                } else {
+                    Auth.saveUser(res);
+                    Auth.loadUser()
                 }
-                this.props.loginUser(user);
             }
         });
     };
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.auth.isAuthenticated) {
-            this.props.history.push('/')
-        }
-        if(nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
-        }
-    }
-
-    componentDidMount() {
-        if(this.props.auth.isAuthenticated) {
-            this.props.history.push('/');
-        }
+    _onChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     render() {
@@ -67,51 +60,51 @@ class LoginComponent extends Component {
                         <h4>Login</h4>
                         <span>You haven't account? <span>Register</span></span>
                     </div>
+                    <div className='text-errors'>
+                        <span>{this.state.textError}</span>
+                    </div>
                     <div id='components-form-demo-normal-login'>
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <Form.Item>
-                                {getFieldDecorator('username', {
+                                {getFieldDecorator('userName', {
                                     rules: [{required: true, message: 'Please input your username!'}],
                                 })(
-                                    <Input
-                                        style={{height: '50px'}}
-                                        prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                        placeholder="Username"
-                                        value={this.state.username}
-                                        onChange={this.handleInputChange}
-                                    />,
+                                    <div className="label-account">
+                                        <span>UserName</span>
+                                        <Input
+                                            prefix={<Icon type="user"
+                                                          style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                            placeholder="Username" name="username"
+                                            value={this.state.username}
+                                            onChange={this._onChange.bind(this)}/>
+                                    </div>
                                 )}
                             </Form.Item>
                             <Form.Item>
                                 {getFieldDecorator('password', {
                                     rules: [{required: true, message: 'Please input your Password!'}],
                                 })(
-                                    <Input
-                                        style={{height: '50px'}}
-                                        prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                        type="password"
-                                        placeholder="Password"
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                    />,
+                                    <div className="label-account">
+                                        <span>Password</span>
+                                        <Input
+                                            prefix={<Icon type="lock"
+                                                          style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                            type="password" placeholder="Password" name="password"
+                                            value={this.state.password}
+                                            onChange={this._onChange.bind(this)}/>
+                                    </div>
                                 )}
                             </Form.Item>
                             <Form.Item>
                                 {getFieldDecorator('remember', {
                                     valuePropName: 'checked',
                                     initialValue: true,
-                                })(<Checkbox>Remember me</Checkbox>)}
-                                <a className="login-form-forgot" href="">
-                                    Forgot password
-                                </a>
+                                })(
+                                    <Checkbox>Remember me</Checkbox>
+                                )}
+                                <a className="login-form-forgot" href="sad">Forgot password</a>
                                 <Button type="primary" htmlType="submit" className="login-form-button">
                                     Log in
-                                </Button>
-                                <div className='divider-login'>
-                                    <Divider>only passenger</Divider>
-                                </div>
-                                <Button type="primary" htmlType="submit" className="login-form-button">
-                                    Log in with facebook
                                 </Button>
                             </Form.Item>
                         </Form>
@@ -123,18 +116,6 @@ class LoginComponent extends Component {
     }
 }
 
-LoginComponent.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
+export const LoginPassenger = Form.create({})(LoginComponent);
 
-}
-
-const mapStateToProps = (state) => ({
-    auth: state.auth,
-    errors: state.errors
-})
-
-export const LoginPassenger = Form.create({name: 'normal_login'})(LoginComponent);
-
-export default connect(mapStateToProps, { loginUser })(LoginPassenger);
+export default LoginPassenger;

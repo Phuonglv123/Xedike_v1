@@ -23,7 +23,6 @@ class HomeScenes extends Component {
     }
 
     onChangeDate(date, dateString) {
-        console.log(date, dateString);
     }
 
     render() {
@@ -98,40 +97,40 @@ class HomeScenes extends Component {
                 </div>
 
                 {/*<div id='card-book-a'>*/}
-                    {/*<div>*/}
-                        {/*<div style={{textAlign: 'center'}}>*/}
-                            {/*<h3>Offer</h3>*/}
-                        {/*</div>*/}
-                        {/*<div style={{padding: '20px'}}>*/}
-                            {/*<Row gutter={24}>*/}
-                                {/*<Col span={6}>*/}
-                                    {/*<div style={{height: '100px'}}>*/}
-                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
-                                             {/*style={{width: '100%'}}/>*/}
-                                    {/*</div>*/}
-                                {/*</Col>*/}
+                {/*<div>*/}
+                {/*<div style={{textAlign: 'center'}}>*/}
+                {/*<h3>Offer</h3>*/}
+                {/*</div>*/}
+                {/*<div style={{padding: '20px'}}>*/}
+                {/*<Row gutter={24}>*/}
+                {/*<Col span={6}>*/}
+                {/*<div style={{height: '100px'}}>*/}
+                {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                {/*style={{width: '100%'}}/>*/}
+                {/*</div>*/}
+                {/*</Col>*/}
 
-                                {/*<Col span={6}>*/}
-                                    {/*<div style={{height: '100px'}}>*/}
-                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
-                                             {/*style={{width: '100%'}}/>*/}
-                                    {/*</div>*/}
-                                {/*</Col>*/}
-                                {/*<Col span={6}>*/}
-                                    {/*<div style={{height: '100px'}}>*/}
-                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
-                                             {/*style={{width: '100%'}}/>*/}
-                                    {/*</div>*/}
-                                {/*</Col>*/}
-                                {/*<Col span={6}>*/}
-                                    {/*<div style={{height: '100px'}}>*/}
-                                        {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
-                                             {/*style={{width: '100%'}}/>*/}
-                                    {/*</div>*/}
-                                {/*</Col>*/}
-                            {/*</Row>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
+                {/*<Col span={6}>*/}
+                {/*<div style={{height: '100px'}}>*/}
+                {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                {/*style={{width: '100%'}}/>*/}
+                {/*</div>*/}
+                {/*</Col>*/}
+                {/*<Col span={6}>*/}
+                {/*<div style={{height: '100px'}}>*/}
+                {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                {/*style={{width: '100%'}}/>*/}
+                {/*</div>*/}
+                {/*</Col>*/}
+                {/*<Col span={6}>*/}
+                {/*<div style={{height: '100px'}}>*/}
+                {/*<img src={require('../../res/img/1553493193291.jpg')} alt=""*/}
+                {/*style={{width: '100%'}}/>*/}
+                {/*</div>*/}
+                {/*</Col>*/}
+                {/*</Row>*/}
+                {/*</div>*/}
+                {/*</div>*/}
                 {/*</div>*/}
                 <div className="card-ticket">
                     <div className="card-ticket-padding">
