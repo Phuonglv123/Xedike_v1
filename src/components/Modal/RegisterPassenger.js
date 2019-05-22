@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
-import {Button, Col, Divider, Form, Icon, Input, Row} from "antd";
+import {Button, Checkbox, Col, Form, Icon, Input, Modal, Row} from "antd";
 import API from "../../service/api/API";
-import type {Passenger} from "../../service/type/user";
+import axios from 'axios';
 
-type Props = {};
+// type Props = {};
+//
+// type State = {
+//     passenger: Passenger
+// }
 
-type State = {
-    passenger: Passenger
-}
-
-class RegisterPassenger extends Component<Props, State> {
+class RegisterPassenger extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            passenger: null
+            username: '',
+            password: '',
+            confirmedpassword: '',
+            firstname: '',
+            lastname: '',
+            phone: '',
+            birthday: ''
         }
     }
 
@@ -23,15 +29,31 @@ class RegisterPassenger extends Component<Props, State> {
         e.preventDefault();
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                let res = await API.registerPassenger(this.state.passenger)
-                console.log(res)
+                await axios({
+                    method: 'post',
+                    url: 'http://localhost:4000/api/passenger/register',
+                    data: {
+                        username: this.state.username,
+                        password: this.state.password,
+                        confirmedpassword: this.state.confirmedpassword,
+                        firstname: this.state.firstname,
+                        lastname: this.state.lastname,
+                        phone: this.state.phone,
+                        birthday: this.state.birthday
+                    }
+                })
             }
         });
     };
 
+    _onChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
     render() {
         const {getFieldDecorator} = this.props.form;
-        const passenger = this.state.passenger;
         return (
             <div id='loginComponent'>
                 <div className='header-login'>
@@ -41,99 +63,86 @@ class RegisterPassenger extends Component<Props, State> {
                 <div id='components-form-demo-normal-login'>
                     <Form onSubmit={this.handleSubmit} className="login-form">
                         <Form.Item>
-                            {getFieldDecorator('username', {
+                            {getFieldDecorator('userName', {
                                 rules: [{required: true, message: 'Please input your username!'}],
                             })(
-                                <Input
-                                    style={{height: '50px'}}
-                                    prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                    placeholder="Username"
-                                    value={passenger.usernanme}
-                                    onChange={(e) => this.setState({
-                                        passenger: {
-                                            ...Passenger,
-                                            name: e.target.value
-                                        }
-                                    })}
-                                />,
+                                <div className="label-account">
+                                    <span>UserName</span>
+                                    <Input
+                                        prefix={<Icon type="user"
+                                                      style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                        placeholder="Username" name="username"
+                                        value={this.state.username}
+                                        onChange={this._onChange.bind(this)}/>
+                                </div>
                             )}
                         </Form.Item>
                         <Form.Item>
                             {getFieldDecorator('password', {
                                 rules: [{required: true, message: 'Please input your Password!'}],
                             })(
-                                <Input
-                                    style={{height: '50px'}}
-                                    prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                    type="password"
-                                    placeholder="Password"
-                                    value={passenger.password}
-                                    onChange={(e) => this.setState({
-                                        passenger: {
-                                            ...Passenger,
-                                            name: e.target.value
-                                        }
-                                    })}
-                                />,
+                                <div className="label-account">
+                                    <span>Password</span>
+                                    <Input
+                                        prefix={<Icon type="lock"
+                                                      style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                        type="password" placeholder="Password" name="password"
+                                        value={this.state.password}
+                                        onChange={this._onChange.bind(this)}
+                                    />
+                                </div>
                             )}
                         </Form.Item>
                         <Form.Item>
                             {getFieldDecorator('password', {
-                                rules: [{required: true, message: 'Please input your re-Password!'}],
+                                rules: [{required: true, message: 'Please input your Password!'}],
                             })(
-                                <Input
-                                    style={{height: '50px'}}
-                                    prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                    type="password"
-                                    placeholder="Re-Password"
-                                    value={passenger.confirmedpassword}
-                                    onChange={(e) => this.setState({
-                                        passenger: {
-                                            ...Passenger,
-                                            name: e.target.value
-                                        }
-                                    })}
-                                />,
+                                <div className="label-account">
+                                    <span>Re-Password</span>
+                                    <Input
+                                        prefix={<Icon type="lock"
+                                                      style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                        type="password" placeholder="Re-Password" name="confirmedpassword"
+                                        value={this.state.confirmedpassword}
+                                        onChange={this._onChange.bind(this)}
+                                    />
+                                </div>
                             )}
                         </Form.Item>
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item>
                                     {getFieldDecorator('First Name', {
-                                        rules: [{required: true, message: 'Please input your Password!'}],
+                                        rules: [{required: true, message: 'Please input your first name!'}],
                                     })(
-                                        <Input
-                                            style={{height: '50px'}}
-                                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                            placeholder="First Name"
-                                            value={passenger.firstname}
-                                            onChange={(e) => this.setState({
-                                                passenger: {
-                                                    ...Passenger,
-                                                    name: e.target.value
-                                                }
-                                            })}
-                                        />,
+                                        <div className="label-account">
+                                            <span>First Name:</span>
+                                            <Input
+                                                prefix={<Icon type="lock"
+                                                              style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                                type="text" placeholder="first name" name="firstname"
+                                                value={this.state.firstname}
+                                                onChange={this._onChange.bind(this)}
+                                            />
+                                        </div>
                                     )}
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
                                 <Form.Item>
                                     {getFieldDecorator('Last Name', {
-                                        rules: [{required: true, message: 'Please input your Password!'}],
+                                        rules: [{required: true, message: 'Please input your Last Name!'}],
                                     })(
-                                        <Input
-                                            style={{height: '50px'}}
-                                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                            placeholder="Last Name"
-                                            value={passenger.lastname}
-                                            onChange={(e) => this.setState({
-                                                passenger: {
-                                                    ...Passenger,
-                                                    name: e.target.value
-                                                }
-                                            })}
-                                        />,
+                                        <div className="label-account">
+                                            <span>Last Name:</span>
+                                            <Input
+                                                prefix={<Icon type="lock"
+                                                              style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                                type="text" placeholder="Last Name" name="lastname"
+                                                value={this.state.lastname}
+                                                onChange={this._onChange.bind(this)}
+                                            />
+                                        </div>
                                     )}
                                 </Form.Item>
                             </Col>
@@ -142,53 +151,50 @@ class RegisterPassenger extends Component<Props, State> {
                             <Col span={16}>
                                 <Form.Item>
                                     {getFieldDecorator('Phone Number', {
-                                        rules: [{required: true, message: 'Please input your Password!'}],
+                                        rules: [{required: true, message: 'Please input your Phone Number!'}],
                                     })(
-                                        <Input
-                                            style={{height: '50px'}}
-                                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                            placeholder="Phone Number"
-                                            value={passenger.phone}
-                                            onChange={(e) => this.setState({
-                                                passenger: {
-                                                    ...Passenger,
-                                                    name: e.target.value
-                                                }
-                                            })}
-                                        />,
+                                        <div className="label-account">
+                                            <span>Phone Number:</span>
+                                            <Input
+                                                prefix={<Icon type="lock"
+                                                              style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                                type="text" placeholder="Phone Number" name="phone"
+                                                value={this.state.phone}
+                                                onChange={this._onChange.bind(this)}
+                                            />
+                                        </div>
                                     )}
                                 </Form.Item>
                             </Col>
                             <Col span={8}>
                                 <Form.Item>
-                                    {getFieldDecorator('Birthday', {
-                                        rules: [{required: true, message: 'Please input your Password!'}],
+                                    {getFieldDecorator('BirthDay', {
+                                        rules: [{required: true, message: 'Please input your BirthDay!'}],
                                     })(
-                                        <Input
-                                            style={{height: '50px'}}
-                                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                                            placeholder="Birthday"
-                                            value={passenger.birthday}
-                                            onChange={(e) => this.setState({
-                                                passenger: {
-                                                    ...Passenger,
-                                                    name: e.target.value
-                                                }
-                                            })}
-                                        />,
+                                        <div className="label-account">
+                                            <span>BirthDay:</span>
+                                            <Input
+                                                prefix={<Icon type="lock"
+                                                              style={{color: 'rgba(0,0,0,.25)'}}/>}
+                                                type="text" placeholder="BirthDay" name="birthday"
+                                                value={this.state.birthday}
+                                                onChange={this._onChange.bind(this)}
+                                            />
+                                        </div>
                                     )}
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Form.Item>
+                            {getFieldDecorator('remember', {
+                                valuePropName: 'checked',
+                                initialValue: true,
+                            })(
+                                <Checkbox>Remember me</Checkbox>
+                            )}
+                            <a className="login-form-forgot" href="sad">Forgot password</a>
                             <Button type="primary" htmlType="submit" className="login-form-button">
-                                Register passenger
-                            </Button>
-                            <div className='divider-login'>
-                                <Divider>or</Divider>
-                            </div>
-                            <Button type="primary" htmlType="submit" className="login-form-button">
-                                Log in with facebook
+                                Register Passenger
                             </Button>
                         </Form.Item>
                     </Form>

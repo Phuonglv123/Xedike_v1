@@ -26,7 +26,7 @@ export default class BaseApi {
                 method: option.method,
                 headers: {
                     'Content-type': 'application/json',
-                    'Authorization': `Token ${this.token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 url: `${this.apiUrl}${option.url}`,
                 data: option.params,
@@ -41,8 +41,8 @@ export default class BaseApi {
                 // });
             }
             if (res.status === 401) {
-                AppUrl.history.push(AppUrl.login());
-                return res.data;
+                // AppUrl.history.push(AppUrl.login());
+                // return res.data;
                 // window.location = AppURL.login();
             }
 

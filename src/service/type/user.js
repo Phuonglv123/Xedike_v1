@@ -1,5 +1,5 @@
 export type Passenger = {
-    usernanme: string,
+    username: string,
     password: string,
     confirmedpassword: string,
     firstname: string,
