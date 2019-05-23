@@ -3,21 +3,38 @@ import {Link, withRouter} from 'react-router-dom';
 import {Button, Layout, Menu} from "antd";
 import LoginComponent from "../Modal/LoginComponent";
 import RegiserComponent from "../Modal/RegiserComponent";
+import Auth from "../../service/api/Auth";
+import type {LocalUser} from "../../service/type/auth";
 
 const {Header} = Layout;
+type Props = {};
+type State = {
+    user: LocalUser
+}
 
-class NavBar extends Component {
+class NavBar extends Component<State, Props> {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            modalLogin: false,
-            modalRegister: false,
-        }
+    state: State = {
+        modalLogin: false,
+        modalRegister: false,
+        user: null,
+    }
+
+    componentDidMount(): void {
+        let user = Auth.getUser();
+        console.log(user)
+        this.setState({
+            user: user
+        })
+    }
+
+    onLogOut = () => {
+        Auth.logout();
+        window.location.reload()
     }
 
     render() {
-        const user = localStorage.getItem('user')
+        const user = localStorage.getItem('user');
         return (
             <div>
                 <Header style={{backgroundColor: 'white'}}>
@@ -33,7 +50,8 @@ class NavBar extends Component {
                                 <Link to="/">Home</Link>
                             </Menu.Item>
                             <Menu.Item key="2">
-                                <Button htmlType='button' size='default'>Logout</Button>
+                                <Button htmlType='button' size='default'
+                                        onClick={this.onLogOut.bind(this)}>Logout</Button>
                             </Menu.Item>
                         </Menu> : <Menu
                             theme="light"

@@ -29,7 +29,7 @@ class RegisterPassenger extends Component {
         e.preventDefault();
         this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                await axios({
+                let res = await axios({
                     method: 'post',
                     url: 'http://localhost:4000/api/passenger/register',
                     data: {
@@ -41,7 +41,8 @@ class RegisterPassenger extends Component {
                         phone: this.state.phone,
                         birthday: this.state.birthday
                     }
-                })
+                });
+                console.log(res)
             }
         });
     };

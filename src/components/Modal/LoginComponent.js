@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Checkbox, Form, Icon, Input, Modal} from 'antd';
 import Auth from '../../service/api/Auth';
 import './LoginComponent.css';
+import AppURL from "../routes/AppURL";
 
 type Props = {
     history: History
@@ -28,7 +29,6 @@ class LoginComponent extends Component<Props, State> {
                     username: this.state.username,
                     password: this.state.password
                 });
-                console.log(res)
                 if (res.code === 400) {
                     this.setState({
                         textError: res.detail.globalErrors
@@ -36,7 +36,8 @@ class LoginComponent extends Component<Props, State> {
                 } else {
                     Auth.saveUser(res);
                     Auth.loadUser()
-                }
+                    this.props.onClose();
+            }
             }
         });
     };

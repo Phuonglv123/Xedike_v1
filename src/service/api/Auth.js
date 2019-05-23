@@ -45,6 +45,7 @@ class Auth {
         try {
             if (user) {
                 localStorage.setItem('user', JSON.stringify(user.token));
+                return user;
             }
         } catch (e) {
             console.log(e);

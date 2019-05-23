@@ -1,5 +1,6 @@
 class AppURL {
-    static home(){
+
+    static home() {
         return '/'
     }
 }
